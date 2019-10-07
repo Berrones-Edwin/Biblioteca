@@ -1,0 +1,76 @@
+<?php
+
+namespace App\Http\Controllers\Seguridad;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Models\Seguridad\Usuario;
+
+class RegistroController extends Controller
+{
+    //
+    use AuthenticatesUsers;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('guest')
+             ->except('logout');
+    }
+
+    public function registro(Request $request)
+    {
+        return View('seguridad.registro');
+    }
+
+    
+    public function guardarRegistro(Request $request)
+    {
+        // dd();
+
+        $users = Usuario::where('usuario',$request->usuario)->get()->count();
+
+        // dd();
+        $this->validateLogin($request);
+
+        if($users > 0){
+
+            return redirect()->route('registro')
+                             ->with('mensaje-error','El usuario ya existe.');
+        }
+        if(strlen($request->password)<6){
+            return redirect()->route('registro')
+                             ->with('mensaje-error','Tu contraseña debe de ser al menos de 6 caracteres.');
+        }
+                            
+        $nuevoUsuario = Usuario::create([
+            'usuario' => $request->usuario,
+            'password' =>bcrypt($request->password),
+            'nombre' => $request->nombre
+        ]);
+
+        if(!$nuevoUsuario){
+            return redirect()->route('registro')
+                             ->with('mensaje-error','Algo salió mal. Intentelo más tarde.');
+        }
+
+        return redirect()->route('login')
+                             ->with('mensaje','Ahora ya puedes iniciar sesión.');
+        
+    }
+
+
+    protected function validateLogin(Request $request)
+    {
+        $request->validate([
+            'usuario' => 'required|string',
+            'password' => 'required|string',
+            'nombre' => 'required|string',
+        ]);
+    }
+}
