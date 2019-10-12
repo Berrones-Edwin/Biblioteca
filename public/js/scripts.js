@@ -26,7 +26,7 @@ $(document).ready(function () {
     //---------------------------------------------------------
     const modal = $('#modal-seleccionar-rol');
     if (modal.length && modal.data('rol-set') == 'NO')
-        modal.modal('show');
+            modal.modal('show');
 
     $('.asignar-rol').on('click', function (event) {
         event.preventDefault();
