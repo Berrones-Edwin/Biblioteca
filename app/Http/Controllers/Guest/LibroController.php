@@ -20,7 +20,7 @@ class LibroController extends Controller
         // dd(auth()->user());
         // dd(session()->all());
         
-        dd(cache()->get('Permiso.rolid.2'));
+        // dd(cache()->get('Permiso.rolid.2'));
         can('lista-libros');
 
         $libros = Libro::orderBy('id')->get();
@@ -36,6 +36,9 @@ class LibroController extends Controller
     public function create()
     {
         //
+        
+        return view('guest.libro.crear');
+       
     }
 
     /**
@@ -46,7 +49,8 @@ class LibroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($foto = Libro::setCaratula($request->foto_up))
+            $request->request->add(['foto' => $foto]);
     }
 
     /**

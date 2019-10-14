@@ -34,14 +34,23 @@ if (!function_exists('can')) {
             // });
 
             //GUARDA TODOS LOS PERMISOS DEPENDIENDO DEL ROL
+            /**
+             * 
+             * array:4 [▼
+                *  0 => "crear-libros"
+                *  1 => "editar-libros"
+                *  2 => "prestar-libro"
+                *  3 => "lista-libros"
+                *]
+             */
             $permisos = Cache::rememberForever("Permiso.rolid.{$rolId}",function(){
                 return Permiso::whereHas('roles',function($query){
                     $query->where('rol_id',session()->get('rol_id'));
                 })->get()->pluck('slug')->toArray();
             });
-            $permisos = Permiso::whereHas('roles',function($query){
-                        $query->where('rol_id',session()->get('rol_id'));
-                    })->get()->pluck('slug')->toArray();
+            // $permisos = Permiso::whereHas('roles',function($query){
+            //             $query->where('rol_id',session()->get('rol_id'));
+            //         })->get()->pluck('slug')->toArray();
 
             // dd($permisos);
 
