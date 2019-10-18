@@ -121,6 +121,8 @@ Route::group(['namespace'=>'Guest'],function(){
     
     Route::get('libro/crear','LibroController@create')->name('libro-crear');
     Route::post('libro','LibroController@store')->name('libro-guardar');
+
+    Route::post('libro/detalles/{libro}','LibroController@show')->name('libro-detalles');
     
     Route::get('libro/editar/{id}','LibroController@edit')->name('libro-editar');
     Route::put('libro/{id}','LibroController@update')->name('libro-actualizar');

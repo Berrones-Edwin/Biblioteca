@@ -25,7 +25,7 @@ class LibroController extends Controller
 
         $libros = Libro::orderBy('id')->get();
 
-        return view('guest.libro.index');
+        return view('guest.libro.index',compact('libros'));
     }
 
     /**
@@ -35,10 +35,7 @@ class LibroController extends Controller
      */
     public function create()
     {
-        //
-        
         return view('guest.libro.crear');
-       
     }
 
     /**
@@ -51,6 +48,8 @@ class LibroController extends Controller
     {
         if($foto = Libro::setCaratula($request->foto_up))
             $request->request->add(['foto' => $foto]);
+        Libro::create($request->all());
+        return redirect()->route('libro')->with('mensaje','El libro se creo correctamente');
     }
 
     /**
@@ -59,9 +58,10 @@ class LibroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Libro $libro)
     {
         //
+        // return view();
     }
 
     /**
@@ -73,6 +73,8 @@ class LibroController extends Controller
     public function edit($id)
     {
         //
+        $libro = Libro::findOrFail($id);
+        return view('guest.libro.editar',compact('libro'));
     }
 
     /**
@@ -84,7 +86,16 @@ class LibroController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $libro= Libro::findOrFail($id);
+
+        if($foto = Libro::setCaratula($request->foto_up,$libro->foto))
+            $request->request->add(['foto' => $foto]);
+
+        $libro->update($request->all());
+        return redirect()->route('libro')->with('mensaje','El libro se editó correctamente');
+
+        // dd($request->all());
     }
 
     /**
@@ -93,8 +104,20 @@ class LibroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,Request $request)
     {
         //
+        if($request->ajax()){
+
+            $libro = Libro::findOrFail($id);
+            if($libro->destroy($id)){
+                return response()->json(['mensaje'=>'ok']);
+            }else{
+                
+                return response()->json(['mensaje'=>'ng']);
+            }
+        }else{
+            abort(404);
+        }
     }
 }

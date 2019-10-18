@@ -4,7 +4,7 @@
 @endsection
 
 @section('scripts')
-    <script src='{{ asset("pages/scripts/guest/libro/index.js") }}'></script>
+    <script src='{{ asset("pages/scripts/admin/libro/index.js") }}'></script>
 @endsection
 
 
@@ -27,11 +27,7 @@
                         <thead>
                             <tr>
                                 <th>Titulo</th>
-                                <th>ISBN</th>
-                                <th>Autor</th>
-                                <!-- <th>Cantidad</th>
-                                <th>Editorial</th>
-                                <th>Foto</th> -->
+                                <th>Cantidad</th>
                                 <th class="width70" ></th>
                             </tr>
                         </thead>
@@ -40,8 +36,7 @@
                                 @foreach($libros as $libro)
                                     <tr>
                                         <td>{{ $libro->titulo }}</td>
-                                        <td>{{ $libro->isbn }}</td>
-                                        <td>{{ $libro->autor }}</td>
+                                        <td>{{ $libro->cantidad }}</td>
                                         <td>
                                             <div class="box-tools pull-right">
                                                 <a href="{{ route('libro-editar',['id'=>$libro->id]) }}" type="button" class="btn btn-box-tool tooltipsC"
