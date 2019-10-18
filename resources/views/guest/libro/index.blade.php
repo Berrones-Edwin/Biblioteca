@@ -9,8 +9,10 @@
 
 
 @section('contenido')
+
     <div class="row">
         <div class="col-lg-12">
+            @csrf()
             @include('includes.form-mensajes')
             <div class="box box-success">
                 <div class="box-header with-border">    
@@ -35,7 +37,7 @@
                             @if(isset($libros))
                                 @foreach($libros as $libro)
                                     <tr>
-                                        <td>{{ $libro->titulo }}</td>
+                                        <td> <a href="{{ route('libro-detalles',$libro) }}" class="mostrar-detalles"> {{ $libro->titulo }} </a></td>
                                         <td>{{ $libro->cantidad }}</td>
                                         <td>
                                             <div class="box-tools pull-right">
@@ -65,4 +67,21 @@
             </div>
         </div>
     </div>
+    
+    <div class="modal fade" id="modal-ver-libro" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Libro</h4>
+                </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+    
 @endsection

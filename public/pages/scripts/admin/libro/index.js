@@ -4,7 +4,7 @@ $(document).ready(function () {
         event.preventDefault();
 
         const form = $(this);
-        console.log(form.attr('action'))
+
         swal({
             title: '¿Está seguro que desea eliminar el registro?',
             text: 'Esta acción no se puede deshacer!',
@@ -14,23 +14,38 @@ $(document).ready(function () {
                 confirm: 'Aceptar'
             }
         }).then((value) => {
-            if (value) ajaxRequest(form);
+            if (value) ajaxRequest(form.serialize(), form.attr('action'), 'eliminarLibro', form);
         });
     });
 
-    let ajaxRequest = (form) => {
-        $.ajax({
-            url:form.attr('action'),
-            type:'POST',
-            data:form.serialize(),
-            success:function(response){
-                console.log(response)
-                if(response.mensaje==='ok'){
+    $('.mostrar-detalles').click(function () {
+        event.preventDefault();
+        const url = $(this).attr('href');
+        const data = {
+            _token: $('input[name=_token]').val()
+        };
+        ajaxRequest(data,url,'verLibro')
+    })
 
-                    form.parents('tr').remove();
-                    Biblioteca.notificaciones('El registro fue eliminado correctamente', 'Biblioteca', 'success');
-                }else{
-                    Biblioteca.notificaciones('El registro no pudo ser eliminado, hay recursos usandolo', 'Biblioteca', 'error');
+    let ajaxRequest = (data, url, funcion, form=false) => {
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: data,
+            success: function (response) {
+                // console.log(response)
+                if (funcion === 'eliminarLibro') {
+                    if (response.mensaje === 'ok') {
+
+                        form.parents('tr').remove();
+                        Biblioteca.notificaciones('El registro fue eliminado correctamente', 'Biblioteca', 'success');
+                    } else {
+                        Biblioteca.notificaciones('El registro no pudo ser eliminado, hay recursos usandolo', 'Biblioteca', 'error');
+                    }
+                } else if (funcion === 'verLibro') {
+                    // console.log('hola');return;
+                    $('#modal-ver-libro .modal-body').html(response)
+                    $('#modal-ver-libro').modal('show');
                 }
             }
         });
