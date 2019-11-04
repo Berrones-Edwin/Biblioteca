@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Guest;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 
 use App\Models\Guest\Libro;
+use App\Http\Requests\ValidacionLibro;
 
 class LibroController extends Controller
 {
@@ -44,7 +46,7 @@ class LibroController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ValidacionLibro $request)
     {
         if($foto = Libro::setCaratula($request->foto_up))
             $request->request->add(['foto' => $foto]);
@@ -69,10 +71,8 @@ class LibroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Libro $libro)
     {
-        //
-        $libro = Libro::findOrFail($id);
         return view('guest.libro.editar',compact('libro'));
     }
 
@@ -83,18 +83,13 @@ class LibroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ValidacionLibro $request, Libro $libro)
     {
-        
-        $libro= Libro::findOrFail($id);
-
         if($foto = Libro::setCaratula($request->foto_up,$libro->foto))
             $request->request->add(['foto' => $foto]);
 
         $libro->update($request->all());
         return redirect()->route('libro')->with('mensaje','El libro se editó correctamente');
-
-        // dd($request->all());
     }
 
     /**
@@ -103,13 +98,14 @@ class LibroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id,Request $request)
+    public function destroy(Libro $libro,Request $request)
     {
         //
         if($request->ajax()){
 
-            $libro = Libro::findOrFail($id);
+            // $libro = Libro::findOrFail($id);
             if($libro->destroy($id)){
+                Storage::disk('public')->delete("imagenes/caratulas/{$libro->foto}");
                 return response()->json(['mensaje'=>'ok']);
             }else{
                 

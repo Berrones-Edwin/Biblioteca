@@ -124,10 +124,10 @@ Route::group(['namespace'=>'Guest'],function(){
 
     Route::post('libro/detalles/{libro}','LibroController@show')->name('libro-detalles');
     
-    Route::get('libro/editar/{id}','LibroController@edit')->name('libro-editar');
-    Route::put('libro/{id}','LibroController@update')->name('libro-actualizar');
+    Route::get('libro/editar/{libro}','LibroController@edit')->name('libro-editar');
+    Route::put('libro/{libro}','LibroController@update')->name('libro-actualizar');
     
-    Route::delete('libro/{id}','LibroController@destroy')->name('libro-eliminar');
+    Route::delete('libro/{libro}','LibroController@destroy')->name('libro-eliminar');
 });
 
 
