@@ -6,15 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Notifications\Notifiable;
+
 
 class Usuario extends Authenticatable  
 {
     //
+    use Notifiable;
 
     protected $remember_token=false;
     protected $table ="usuario";
     // Introducir campos de manera masiva
-    protected $fillable =["usuario","nombre","password","correo"];
+    protected $fillable =["usuario","nombre","password","email"];
 
     public function roles()
     {
@@ -51,9 +54,9 @@ class Usuario extends Authenticatable
      * @param  string  $value
      * @return string
      */
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = Hash::make($value);
-    }
+    // public function setPasswordAttribute($value)
+    // {
+    //     $this->attributes['password'] = Hash::make($value);
+    // }
 
 }

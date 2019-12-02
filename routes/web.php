@@ -20,6 +20,12 @@
  * para indicar donde se encuentra el controlador
  */
 
+//RESETEO DE PASSWORDS
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+
 //  Se modifico el RouteServiceProvider y se agrego
 // que todos los ID seran numericos
 
@@ -27,6 +33,7 @@
 Route::get('/', 'InicioController@index')->name('inicio');
 Route::post('ajax-session', 'AjaxController@setSession')->name('ajax')->middleware('auth');
 
+// REGISTRO E INICIO DE SESION
 Route::group(['prefix'=>'seguridad','namespace'=>'Seguridad'],function(){
     
     Route::get('login','LoginController@index')->name('login');

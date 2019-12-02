@@ -36,11 +36,14 @@
   </div>
   @include('includes.form-error')
   @include('includes.form-mensajes')
+  @if(session('status'))
+    <div class="alert alert-success" role="alert">
+      {{ session('status') }}
+    </div>
+  @endif
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Inicio de sesion</p>
-
-   
     <form action="{{ route('login-post') }}" method="post" autocomplete="false">
         @csrf
       <div class="form-group has-feedback">
@@ -52,14 +55,21 @@
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
-        <div class="col-xs-8">
-          <a href="{{ route('register') }}">Registro</a>
-        </div>
+      
         <!-- /.col -->
-        <div class="col-xs-4">
+        <div class="col-xs-12">
           <button type="submit" class="btn btn-primary btn-block btn-flat">Accesar</button>
         </div>
         <!-- /.col -->
+
+        <div class="col-xs-4">
+          <!-- <a href="{{ route('register') }}">Registro</a> -->
+          @if(Route::has('password.request'))
+            <a href="{{ route('password.request') }}" class="btn btn-link mx-auto">
+              {{ __('Forgot Your Password?') }}
+            </a>
+          @endif
+        </div>
       </div>
     </form>
   </div>
