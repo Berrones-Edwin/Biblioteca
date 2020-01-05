@@ -34,6 +34,7 @@ class Menu extends Model
     public function getPadres($front)
     {
         if ($front) {
+            // Checa que tenga roles && que el rol_id sea igual al del usuario
             return $this->whereHas('roles', function ($query) {
                 
                 $query->where('rol_id', session()->get('rol_id'))->orderby('menu_id');

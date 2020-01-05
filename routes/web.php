@@ -135,6 +135,8 @@ Route::group(['namespace'=>'Guest'],function(){
     Route::put('libro/{libro}','LibroController@update')->name('libro-actualizar');
     
     Route::delete('libro/{libro}','LibroController@destroy')->name('libro-eliminar');
+
+    Route::get('libro-prestamo','LibroPrestamoController@index')->name('libroPrestamo.index');
 });
 
 
