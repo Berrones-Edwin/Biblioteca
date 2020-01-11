@@ -16,9 +16,9 @@
             @include('includes.form-mensajes')
             <div class="box box-success">
                 <div class="box-header with-border">    
-                    <h3 class="box-title">Libros</h3>
+                    <h3 class="box-title">Libros Prestados</h3>
                     <div class="box-tools pull-right">
-                        <a href="{{ route('libro-crear')  }}" class="btn btn-primary" type="button" >
+                        <a href="{{ route('libroPrestamo-crear') }}" class="btn btn-primary" type="button" >
                             <i class="fa fa-plus"></i>
                             Nuevo Registro
                         </a>
@@ -28,8 +28,10 @@
                     <table class="table table-striped table-bordered table-hover"  id="tabla-data">
                         <thead>
                             <tr>
+                                <th class="text-center">Imagen</th>
                                 <th>Titulo</th>
-                                <th>Cantidad</th>
+                                <th>Prestado por</th>
+                                <th>Prestado a</th>
                                 <th class="width70" ></th>
                             </tr>
                         </thead>
@@ -37,12 +39,12 @@
                             @if(isset($libros))
                                 @foreach($libros as $libro)
                                     <tr>
-                                        <td> 
-                                            <a href="{{ route('libro-detalles',$libro) }}" class="mostrar-detalles">
-                                                {{ $libro->titulo }} 
-                                            </a>
+                                        <td class="text-center"> 
+                                            <img width="80" src="{{ Request::root() }}{{ Storage::url('imagenes/caratulas/' . $libro->libro->foto)   }}" alt="">
                                         </td>
-                                        <td>{{ $libro->cantidad }}</td>
+                                        <td>{{ $libro->libro->titulo }}</td>
+                                        <td>{{ $libro->usuario->nombre }}</td>
+                                        <td>{{ $libro->prestado_a }}</td>
                                         <td>
                                             <div class="box-tools pull-right">
                                                 <a href="{{ route('libro-editar',$libro) }}" type="button" class="btn btn-box-tool tooltipsC"

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guest;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Guest\LibroPrestamo;
 
 class LibroPrestamoController extends Controller
 {
@@ -14,7 +15,9 @@ class LibroPrestamoController extends Controller
      */
     public function index()
     {
-        //
+        
+        $libros = LibroPrestamo::with('usuario:id,nombre','libro')->orderBy('created_at')->get();
+        return view('guest.libro_prestamo.index',compact('libros'));
     }
 
     /**

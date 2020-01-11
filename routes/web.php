@@ -136,7 +136,20 @@ Route::group(['namespace'=>'Guest'],function(){
     
     Route::delete('libro/{libro}','LibroController@destroy')->name('libro-eliminar');
 
-    Route::get('libro-prestamo','LibroPrestamoController@index')->name('libroPrestamo.index');
+    //====================================================
+    //=================LIBRO PRESTAMO=====================
+    //====================================================
+    Route::get('prestamo','LibroPrestamoController@index')->name('libroPrestamo.index');
+
+    Route::get('prestamo/crear','LibroPrestamoController@create')->name('libroPrestamo-crear');
+    Route::post('prestamo','LibroPrestamoController@store')->name('libroPrestamo-guardar');
+
+    Route::post('prestamo/detalles/{prestamo}','LibroPrestamoController@show')->name('libroPrestamo-detalles');  
+
+    Route::get('prestamo/editar/{prestamo}','LibroPrestamoController@edit')->name('libroPrestamo-editar');
+    Route::put('prestamo/{prestamo}','LibroPrestamoController@update')->name('libroPrestamo-actualizar');
+
+    Route::delete('prestamo/{prestamo}','LibroPrestamoController@destroy')->name('libroPrestamo-eliminar');
 });
 
 
