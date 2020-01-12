@@ -49,7 +49,7 @@
                                                 title="Editar este registro">
                                                     <i class="fa fa-fw fa-pencil text-primary"></i>
                                                 </a>
-                                                <form action="{{ route('libro-eliminar',['id'=>$libro->id]) }}"
+                                                <form action="{{ route('libro-eliminar',$libro) }}"
                                                         class="form-eliminar d-inline">
                                                     @csrf @method('delete')
 

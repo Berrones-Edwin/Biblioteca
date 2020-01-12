@@ -49,4 +49,11 @@ class Libro extends Model
         Storage::disk('public')->put("imagenes/caratulas/{$imageName}",$imagen->stream());
         return $imageName;
     }
+
+    // Relaciones
+
+    public function prestamos()
+    {
+        return $this->HasMany(LibroPrestamo::class);
+    }
 }

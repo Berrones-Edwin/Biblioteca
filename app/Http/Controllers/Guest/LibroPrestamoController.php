@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Guest;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
+
 use App\Models\Guest\LibroPrestamo;
+use App\Models\Guest\Libro;
 
 class LibroPrestamoController extends Controller
 {
@@ -15,7 +18,7 @@ class LibroPrestamoController extends Controller
      */
     public function index()
     {
-        
+
         $libros = LibroPrestamo::with('usuario:id,nombre','libro')->orderBy('created_at')->get();
         return view('guest.libro_prestamo.index',compact('libros'));
     }
@@ -27,7 +30,19 @@ class LibroPrestamoController extends Controller
      */
     public function create()
     {
-        //
+        //select `libro`.*, (select count(*) from `libro_prestamo` where `libro`.`id` = `libro_prestamo`.`libro_id` and `fecha_devolucion` is null) as `prestamos_count` from `libro`
+        $libros = Libro::withCount(['prestamos'=> function(Builder $query){
+
+            $query->whereNull('fecha_devolucion');
+
+        }])->get()->filter(function($item,$key){
+
+            //regresamos solo los que no estan prestamos
+            return $item->cantidad > $item->prestamo_count;
+
+        })->pluck('titulo','id');
+
+        return view('guest.libro_prestamo.crear',compact('libros'));
     }
 
     /**

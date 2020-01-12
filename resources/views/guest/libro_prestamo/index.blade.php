@@ -47,11 +47,11 @@
                                         <td>{{ $libro->prestado_a }}</td>
                                         <td>
                                             <div class="box-tools pull-right">
-                                                <a href="{{ route('libro-editar',$libro) }}" type="button" class="btn btn-box-tool tooltipsC"
+                                                <a href="" type="button" class="btn btn-box-tool tooltipsC"
                                                 title="Editar este registro">
                                                     <i class="fa fa-fw fa-pencil text-primary"></i>
                                                 </a>
-                                                <form action="{{ route('libro-eliminar',['id'=>$libro->id]) }}"
+                                                <form action=""
                                                         class="form-eliminar d-inline">
                                                     @csrf @method('delete')
 
