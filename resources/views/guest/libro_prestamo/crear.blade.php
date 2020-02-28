@@ -22,10 +22,10 @@
                         <a href="{{ route('libroPrestamo.index') }}" type="button" class="btn btn-primary"><i class="fa   fa-arrow-left"></i>Regresar</a>
                     </div>
                 </div>
-                <form action="{{ route('libro-guardar') }}" method="POST" id="form-general" class="form-horizontal" enctype= multipart/form-data>
+                <form action="{{ route('libroPrestamo-guardar') }}" method="POST" id="form-general" class="form-horizontal" enctype= multipart/form-data>
                     @csrf
                     <div class="box-body">
-                        @include('guest.libro.form')
+                        @include('guest.libro_prestamo.form')
                     </div>
                     <div class="box-footer">
                         <div class="col-lg-9"></div>

@@ -44,11 +44,18 @@ class UsuarioController extends Controller
      */
     public function store(ValidacionUsuario $request)
     {
-        //
+
+        // $request->password = bcrypt($request->password);
 
         // dd($request->all());
-        $usuario  = Usuario::create($request->all());
-        $usuario->roles()->attach($request->rol_id);
+        // // dd($request->password);
+        Usuario::create([
+            "usuario" => $request->usuario,
+            "nombre" => $request->nombre,
+            "password" => bcrypt($request->password),
+            "email" => $request->email
+        ]);
+       
 
         return redirect()->route('usuario')
                         ->with('mensaje','El usuario se agrego correctamente');

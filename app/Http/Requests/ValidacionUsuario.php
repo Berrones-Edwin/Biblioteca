@@ -30,7 +30,7 @@ class ValidacionUsuario extends FormRequest
                 //EDITAR USUARIO
                 'usuario' => 'required|max:50|unique:usuario,usuario,' . $this->route('id'),
                 'nombre' => 'required|max:50',
-                'correo' => 'required|max:100|unique:usuario,correo,' . $this->route('id'),
+                'email' => 'required|max:100|unique:usuario,email,' . $this->route('id'),
                 'password' => 'nullable|min:8',
                 're_password' => 'required_with:password|nullable|min:8|same:password',
                 'rol_id' => 'required|array',
@@ -41,7 +41,7 @@ class ValidacionUsuario extends FormRequest
                 //CREAR USUARIO
                 'usuario' => 'required|max:50|unique:usuario,usuario,' . $this->route('id'),
                 'nombre' => 'required|max:50',
-                'correo' => 'required|max:100|unique:usuario,correo,' . $this->route('id'),
+                'email' => 'required|max:100|unique:usuario,email,' . $this->route('id'),
                 'password' => 'required|min:8',
                 're_password' => 'required|same:password',
                 'rol_id' => 'required|array',

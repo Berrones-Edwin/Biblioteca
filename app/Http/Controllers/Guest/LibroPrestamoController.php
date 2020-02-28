@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Models\Guest\LibroPrestamo;
 use App\Models\Guest\Libro;
 
+use App\Http\Requests\ValidacionLibroPrestamo;
+
+
 class LibroPrestamoController extends Controller
 {
     /**
@@ -30,7 +33,11 @@ class LibroPrestamoController extends Controller
      */
     public function create()
     {
+
         //select `libro`.*, (select count(*) from `libro_prestamo` where `libro`.`id` = `libro_prestamo`.`libro_id` and `fecha_devolucion` is null) as `prestamos_count` from `libro`
+        //si fecha devolucion es nulo significa que todavia no ha sido entregado
+
+        // dd(1>1);
         $libros = Libro::withCount(['prestamos'=> function(Builder $query){
 
             $query->whereNull('fecha_devolucion');
@@ -38,9 +45,11 @@ class LibroPrestamoController extends Controller
         }])->get()->filter(function($item,$key){
 
             //regresamos solo los que no estan prestamos
-            return $item->cantidad > $item->prestamo_count;
+            // dd(  $item->cantidad . ' - ' . $item->prestamos_count);
+            return $item->cantidad > $item->prestamos_count;
 
         })->pluck('titulo','id');
+     
 
         return view('guest.libro_prestamo.crear',compact('libros'));
     }
@@ -51,9 +60,18 @@ class LibroPrestamoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ValidacionLibroPrestamo $request)
     {
-        //
+
+        $libro = Libro::findorFail($request->libro_id);
+
+        $libro->prestamos()->create([
+            "prestado_a" => $request->prestado_a ,
+            "fecha_prestamo" => $request->fecha_prestamo ,
+            "usuario_id" => auth()->user()->id
+        ]);
+
+        return redirect()->route('libroPrestamo.index')->with('mensaje','El prestamo fue creado correctamente');
     }
 
     /**

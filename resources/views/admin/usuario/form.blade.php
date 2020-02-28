@@ -30,10 +30,10 @@
     </div>
 </div>
 <div class="form-group">
-    <label for=""  class="col-lg-3 control-label requerido" >Correo</label>
+    <label for=""  class="col-lg-3 control-label requerido" >Correo Electronico</label>
     <div class="col-lg-8">
         <input type="text" class="form-control" required autocomplete="off" 
-            placeholder="Correo" id="correo" name="correo" value="{{ old('correo',$usuario->correo ?? '' )}}"  >
+            placeholder="Correo" id="email" name="email" value="{{ old('email',$usuario->email ?? '' )}}"  >
     </div>
 </div>
 <div class="form-group">

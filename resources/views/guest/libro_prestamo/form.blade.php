@@ -1,48 +1,27 @@
-<div class="form-group">
+ <div class="form-group">
     <label for=""  class="col-lg-3 control-label requerido" >Titulo</label>
     <div class="col-lg-8">
-        <input type="text" class="form-control" required autocomplete="off" 
-            placeholder="Titulo" id="titulo" name="titulo"  value="{{ old('titulo',$libro->titulo ?? '' )}}"  >
+        <select class="form-control" name="libro_id" id="libro_id">
+            
+            @foreach($libros as $key => $libro )
+                    <option value="{{ $key}}">
+                        {{ $libro }}
+                    </option>
+            @endforeach
+        </select>
     </div>
 </div>
 <div class="form-group">
-    <label for=""  class="col-lg-3 control-label requerido" >Isbn</label>
+    <label for=""  class="col-lg-3 control-label requerido" >Prestado a:</label>
     <div class="col-lg-8">
         <input type="text" class="form-control" required autocomplete="off" 
-            placeholder="Isbn" id="isbn" name="isbn"  value="{{ old('isbn',$libro->isbn ?? '' )}}"  >
+            placeholder="prestado a" id="prestado_a" name="prestado_a"  value="{{ old('prestado_a',$libro->prestado_a ?? '' )}}"  >
     </div>
 </div>
 <div class="form-group">
-    <label for=""  class="col-lg-3 control-label requerido" >Autor</label>
+    <label for=""  class="col-lg-3 control-label requerido" >Fecha Prestamo</label>
     <div class="col-lg-8">
         <input type="text" class="form-control" required autocomplete="off" 
-            placeholder="Autor" id="autor" name="autor"  value="{{ old('autor',$libro->autor ?? '' )}}"  >
-    </div>
-</div>
-<div class="form-group">
-    <label for=""  class="col-lg-3 control-label requerido" >Cantidad</label>
-    <div class="col-lg-8">
-        <input type="number" class="form-control" required autocomplete="off" 
-            placeholder="Cantidad" id="cantidad" name="cantidad"  value="{{ old('cantidad',$libro->cantidad ?? '' )}}"  >
-    </div>
-</div>
-<div class="form-group">
-    <label for=""  class="col-lg-3 control-label " >Editorial</label>
-    <div class="col-lg-8">
-        <input type="text" class="form-control"  autocomplete="off" 
-            placeholder="Editorial" id="editorial" name="editorial"  value="{{ old('editorial',$libro->editorial ?? '' )}}"  >
-    </div>
-</div>
-@isset($libro)
-    <div class="container">
-        <p>Tu imagen actual:</p>
-        <img class="mx-auto" width="100" src="{{'http://localhost:8080/Laravel/tutoVirtual/biblioteca/public/' .  Storage::url('imagenes/caratulas/' . $libro->foto)  }}" alt="{{ $libro->titulo }}" >
-    </div>
-@endisset
-<div class="form-group">
-    <label for="foto" class="col-lg-3 control-label">Foto</label>
-    <div class="col-lg-5">
-        <!-- <input type="file" name="foto_up" id="foto" data-initial-preview="{{isset($libro->imagen) ? Storage::url('imagenes/caratulas/$data->imagen') : ''}}"  accept="image/*"/> -->
-        <input type="file" name="foto_up" id="foto"  accept="image/*"/>
+            placeholder="YYYY/MM/DD" id="fecha_prestamo" name="fecha_prestamo"  value="{{ old('fecha_prestamo',$libro->fecha_prestamo ?? '' )}}"  >
     </div>
 </div>
