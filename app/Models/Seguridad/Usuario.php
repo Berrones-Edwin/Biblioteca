@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Admin\Rol;
 
 
 class Usuario extends Authenticatable  
@@ -21,7 +22,8 @@ class Usuario extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsToMany('App\Models\Admin\Rol','usuario_rol');
+        return $this->belongsToMany(Rol::class,'usuario_rol');
+        // return $this->belongsToMany('App\Models\Admin\Rol');
     }
 
     public function setSession($roles)

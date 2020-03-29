@@ -14,12 +14,12 @@ class CreateMenuRolTable extends Migration
     public function up()
     {
         Schema::create('menu_rol', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
 
 
-            $table->unsignedInteger('rol_id');
+            $table->unsignedBigInteger('rol_id');
             $table->foreign('rol_id', 'fk_menurol_rol')->references('id')->on('rol')->onDelete('restrict')->onUpdate('restrict');
-            $table->unsignedInteger('menu_id');
+            $table->unsignedBigInteger('menu_id');
             $table->foreign('menu_id', 'fk_menurol_menu')->references('id')->on('menu')->onDelete('restrict')->onUpdate('restrict');
 
 
