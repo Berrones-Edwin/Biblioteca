@@ -74,6 +74,8 @@ class LibroController extends Controller
      */
     public function edit(Libro $libro)
     {
+
+        // dd($libro);
         return view('guest.libro.editar',compact('libro'));
     }
 
@@ -99,12 +101,12 @@ class LibroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Libro $libro,Request $request)
+    public function destroy($id,Request $request)
     {
         //
         if($request->ajax()){
 
-            // $libro = Libro::findOrFail($id);
+            $libro = Libro::findOrFail($id);
             if($libro->destroy($id)){
                 Storage::disk('public')->delete("imagenes/caratulas/{$libro->foto}");
                 return response()->json(['mensaje'=>'ok']);

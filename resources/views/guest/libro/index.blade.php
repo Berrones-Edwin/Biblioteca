@@ -45,9 +45,10 @@
                                         <td>{{ $libro->cantidad }}</td>
                                         <td>
                                             <div class="card-tools pull-right">
+                                                <pre> {{ $libro }} </pre>
                                                 <a href="{{ route('libro-editar',$libro) }}" type="button" class="btn btn-card-tool tooltipsC"
                                                 title="Editar este registro">
-                                                    <i class="fa fa-fw fa-pencil text-primary"></i>
+                                                    <i class="fas fa-edit text-primary"></i>
                                                 </a>
                                                 <form action="{{ route('libro-eliminar',$libro) }}"
                                                         class="form-eliminar d-inline">

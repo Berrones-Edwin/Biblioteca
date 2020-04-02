@@ -19,7 +19,10 @@ $(document).ready(function () {
         container: 'body'
     });
 
-    $('ul.sidebar-menu').find('li.active').parents('li').addClass('active');
+    const menu = $('ul.nav-sidebar').find('a.active').parents('li.has-treeview');
+    menu.addClass('menu-open');
+    menu.children('a').addClass('active');
+
 
     //---------------------------------------------------------
     //--------------TRABAJO CON VENTANA DE ROLES----------------
@@ -29,6 +32,7 @@ $(document).ready(function () {
             modal.modal('show');
 
     $('.asignar-rol').on('click', function (event) {
+        console.log('click')
         event.preventDefault();
         const data = {
             'rol_id': $(this).data('rolid'),

@@ -4,7 +4,7 @@
 @endsection
 
 @section('scripts')
-    <script src='{{ asset("pages/scripts/admin/libro/index.js") }}'></script>
+    <script src='{{ asset("pages/scripts/admin/libro-prestamo/index.js") }}'></script>
 @endsection
 
 
@@ -44,25 +44,13 @@
                                         </td>
                                         <td>{{ $libro->libro->titulo }}</td>
                                         <td>{{ $libro->usuario->nombre }}</td>
-                                        <td>{{ $libro->prestado_a }}</td>
+                                        <td class="fecha-devolucion">{{$libro->fecha_devolucion ?? 'Prestado'}}</td>
                                         <td>
-                                            <div class="card-tools pull-right">
-                                                <a href="" type="button" class="btn btn-card-tool tooltipsC"
-                                                title="Editar este registro">
-                                                    <i class="fa fa-fw fa-pencil text-primary"></i>
+                                            @if(!$libro->fecha_devolucion)
+                                                <a href="{{route('prestamo.devolver', $libro->libro->id)}}" class="libro-devolucion btn-accion-tabla tooltipsC" title="Devolver este libro">
+                                                    <i class="fa fa-fw fa-reply-all"></i>
                                                 </a>
-                                                <form action=""
-                                                        class="form-eliminar d-inline">
-                                                    @csrf @method('delete')
-
-                                                    <button type="submit" 
-                                                            class="btn btn-card-tool tooltipsC eliminar-libro" 
-                                                            title="Eliminar este registro"
-                                                    >
-                                                        <i class="fa fa-trash text-danger"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

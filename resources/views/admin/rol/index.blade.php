@@ -39,7 +39,7 @@
                                                     class="btn btn-card-tool tooltipsC btn-accion-tabla" 
                                                     title="Editar este registro" 
                                                 >
-                                                    <i class="fa fa-fw fa-pencil text-primary"></i>
+                                                    <i class="fas fa-edit text-primary"></i>
                                                 </a>
                                                 
                                                 <form action=" {{ route('rol-eliminar',['id'=>$rol->id]) }} "

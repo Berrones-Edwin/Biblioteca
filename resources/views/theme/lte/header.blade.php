@@ -41,7 +41,7 @@ use Carbon\Carbon;
                 @endauth
                 <div class="dropdown-divider"></div>
                 @if(session()->get("roles") && count(session()->get("roles")) > 1)
-                    <a href="#" class="cambiar-rol dropdown-item dropdown-footer">Cambiar Rol</a>
+                    <a href="#" class="asignar-rol dropdown-item dropdown-footer">Cambiar Rol</a>
                 @endif
             </div>
         </li>

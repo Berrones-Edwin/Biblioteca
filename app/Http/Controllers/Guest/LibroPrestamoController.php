@@ -106,6 +106,19 @@ class LibroPrestamoController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+        if($request->ajax()){
+
+            $libro = LibroPrestamo::where('id',$id)
+                                    ->whereNull('fecha_devolucion')
+                                    ->update([
+                                        'fecha_devolucion' =>date('Y-m-d')
+                                    ]);
+
+            return response()->json(['fecha_devolucion' => date('Y-m-d')]);
+        }else{  
+            abort(404);
+        }
     }
 
     /**

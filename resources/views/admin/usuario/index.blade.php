@@ -48,7 +48,7 @@
                                             <div class="card-tools pull-right">
                                                 <a href="{{ route('usuario-editar',['id'=>$usuario->id]) }}" type="button" class="btn btn-card-tool tooltipsC"
                                                 title="Editar este registro">
-                                                    <i class="fa fa-fw fa-pencil text-primary"></i>
+                                                    <i class="fas fa-edit text-primary"></i>
                                                 </a>
                                                 <form action="{{ route('usuario-eliminar',['id'=>$usuario->id]) }}"
                                                         class="form-eliminar d-inline">

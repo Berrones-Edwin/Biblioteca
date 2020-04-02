@@ -25,7 +25,7 @@
                         <a href="{{ route('libro') }}" type="button" class="btn btn-primary"><i class="fa   fa-arrow-left"></i>Regresar</a>
                     </div>
                 </div>
-                <form action="{{ route('libro-actualizar',['id'=>$libro->id]) }}" method="POST" id="form-general" class="form-horizontal" enctype= multipart/form-data>
+                <form action="{{ route('libro-actualizar',$libro) }}" method="POST" id="form-general" class="form-horizontal" enctype= multipart/form-data>
                     @csrf @method('put')
                     
                     <div class="card-body">
