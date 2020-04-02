@@ -24,7 +24,7 @@ class LibroController extends Controller
         
         // dd(cache()->get('Permiso.rolid.2'));
         // dd(auth()->user());
-        can('lista-libros');
+        can('listar-libros');
 
         $libros = Libro::orderBy('id')->get();
 

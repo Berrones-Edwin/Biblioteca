@@ -35,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
             
         });
 
+        // View::share('theme', 'lte_v3');
         View::share('theme', 'lte');
     }
 }

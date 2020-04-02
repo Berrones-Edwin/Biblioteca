@@ -14,17 +14,17 @@
         <div class="col-lg-12">
             @csrf()
             @include('includes.form-mensajes')
-            <div class="box box-success">
-                <div class="box-header with-border">    
-                    <h3 class="box-title">Libros Prestados</h3>
-                    <div class="box-tools pull-right">
+            <div class="card card-success">
+                <div class="card-header with-border">    
+                    <h3 class="card-title">Libros Prestados</h3>
+                    <div class="card-tools pull-right">
                         <a href="{{ route('libroPrestamo-crear') }}" class="btn btn-primary" type="button" >
                             <i class="fa fa-plus"></i>
                             Nuevo Registro
                         </a>
                     </div>
                 </div>
-                <div class="box-body">
+                <div class="card-body">
                     <table class="table table-striped table-bordered table-hover"  id="tabla-data">
                         <thead>
                             <tr>
@@ -46,8 +46,8 @@
                                         <td>{{ $libro->usuario->nombre }}</td>
                                         <td>{{ $libro->prestado_a }}</td>
                                         <td>
-                                            <div class="box-tools pull-right">
-                                                <a href="" type="button" class="btn btn-box-tool tooltipsC"
+                                            <div class="card-tools pull-right">
+                                                <a href="" type="button" class="btn btn-card-tool tooltipsC"
                                                 title="Editar este registro">
                                                     <i class="fa fa-fw fa-pencil text-primary"></i>
                                                 </a>
@@ -56,7 +56,7 @@
                                                     @csrf @method('delete')
 
                                                     <button type="submit" 
-                                                            class="btn btn-box-tool tooltipsC eliminar-libro" 
+                                                            class="btn btn-card-tool tooltipsC eliminar-libro" 
                                                             title="Eliminar este registro"
                                                     >
                                                         <i class="fa fa-trash text-danger"></i>

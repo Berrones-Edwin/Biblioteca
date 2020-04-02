@@ -37,7 +37,7 @@ Route::post('ajax-session', 'AjaxController@setSession')->name('ajax')->middlewa
 Route::group(['prefix'=>'seguridad','namespace'=>'Seguridad'],function(){
     
     Route::get('login','LoginController@index')->name('login');
-    Route::post('login','LoginController@login')->name('login-post');
+    Route::post('login','LoginController@login')->name('login_post');
     Route::get('logout','LoginController@logout')->name('logout');
     
     Route::get('registro','RegistroController@showRegistrationForm')->name('register');
